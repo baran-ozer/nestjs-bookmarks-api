@@ -13,6 +13,7 @@ import { LoggerMiddleware } from './middleware';
 import { UserController } from './user/user.controller';
 import { BookmarkController } from './bookmark/bookmark.controller';
 import { AuthController } from './auth/auth.controller';
+import helmet from 'helmet';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { AuthController } from './auth/auth.controller';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware)
+      .apply(helmet(), LoggerMiddleware)
       .exclude({ path: 'auth/signup', method: RequestMethod.POST }) // don't use middleware for signup
       .forRoutes(UserController, BookmarkController, AuthController);
   }
