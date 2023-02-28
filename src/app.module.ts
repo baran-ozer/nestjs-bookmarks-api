@@ -29,6 +29,6 @@ export class AppModule implements NestModule {
     consumer
       .apply(helmet(), LoggerMiddleware)
       .exclude({ path: 'auth/signup', method: RequestMethod.POST }) // don't use middleware for signup
-      .forRoutes(UserController, BookmarkController, AuthController);
+      .forRoutes(UserController, BookmarkController, AuthController); // apply middleware for all routes in these controllers
   }
 }
